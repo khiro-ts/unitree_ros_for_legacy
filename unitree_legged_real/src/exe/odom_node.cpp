@@ -11,7 +11,7 @@
 #include <nav_msgs/Odometry.h>
 
 using namespace UNITREE_LEGGED_SDK
-HighState RecvHighLCM ={0}
+HighState RecvHighLCM ={0};
 unitree_legged_msgs::HighState RecvHighROS;
 UNITREE_LEGGED_SDK::LCM roslcm(UNITREE_LEGGED_SDK::HIGHLEVEL);
 
