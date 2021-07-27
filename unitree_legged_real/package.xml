@@ -17,6 +17,8 @@
   <depend>unitree_legged_msgs</depend>
   <depend>eigen</depend>
   <depend>tf</depend>
+  <depend>tf2</depend>
+  <depend>tf2_ros</depend>
   <depend>nav_msgs</depend>
 
 </package>
