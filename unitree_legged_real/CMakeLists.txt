@@ -64,4 +64,5 @@ add_executable(control_lcm src/exe/control_mode.cpp)
 target_link_libraries(control_lcm ${EXTRA_LIBS} ${catkin_LIBRARIES})
 add_dependencies(control_lcm ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
-
+add_executable(odom_node src/exe/odom_node.cpp)
+target_link_libraries(odom_node ${catkin_LIBRARRIES})
