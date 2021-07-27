@@ -1,6 +1,31 @@
 #include <ros/ros.h>
+#include <pthread.h>
+#include <boost/thread.hpp>
+#include <boost/thread/mutex.hpp>
+#include <unitree_legged_msgs/HighCmd.h>
+#include <unitree_legged_msgs/HighState.h>
+#include "unitree_legged_sdk/unitree_legged_sdk.h"
+#include <iostream>
+#include <convert.h>
 #include <tf/transform_broadcaster.h>
 #include <nav_msgs/Odometry.h>
+
+using namespace UNITREE_LEGGED_SDK
+HighState RecvHighLCM ={0}
+unitree_legged_msgs::HighState RecvHighROS;
+UNITREE_LEGGED_SDK::LCM roslcm(UNITREE_LEGGED_SDK::HIGHLEVEL);
+
+
+
+void* update_loop(void* param)
+{
+    LCM *data = (LCM *)param;
+    while(ros::ok){
+        data->Recv();
+        usleep(2000);
+    }
+}
+
 
 int main(int argc, char** argv){
   ros::init(argc, argv, "odometry_publisher");
@@ -13,25 +38,36 @@ int main(int argc, char** argv){
   double y = 0.0;
   double th = 0.0;
 
-  double vx = 0.1;
-  double vy = -0.1;
-  double vth = 0.1;
+  double vx = 0.0;
+  double vy = 0.0;
+  double vth = 0.0;
 
   ros::Time current_time, last_time;
   current_time = ros::Time::now();
   last_time = ros::Time::now();
 
-  ros::Rate r(1.0);
+  ros::Rate r(500);
+  roslcm.SubscribeState();
+  
+  
+  pthread_t tid;
+  pthread_create(&tid, NULL, update_loop, &roslcm);
+  
   while(n.ok()){
-
+        
     ros::spinOnce();               // check for incoming messages
     current_time = ros::Time::now();
+    roslcm.Get(RecvHighLCM);
+    RecvHighROS = ToRos(RecvHighLCM);
 
+    vx = RecvHighRos.forwardSpeed;
+    vy = 0.0;
+    vth = RecvHighRos.rotateSpeed;
     //compute odometry in a typical way given the velocities of the robot
     double dt = (current_time - last_time).toSec();
-    double delta_x = (vx * cos(th) - vy * sin(th)) * dt;
-    double delta_y = (vx * sin(th) + vy * cos(th)) * dt;
-    double delta_th = vth * dt;
+    double delta_x = RecvHighRos.forwardSpeed * std::cos(th)*dt;
+    double delta_y = RecvHighRos.forwardSpeed * std::sin(th)*dt;
+    double delta_th = RecvHighRos.rotateSpeed * dt;
 
     x += delta_x;
     y += delta_y;
@@ -44,7 +80,9 @@ int main(int argc, char** argv){
     geometry_msgs::TransformStamped odom_trans;
     odom_trans.header.stamp = current_time;
     odom_trans.header.frame_id = "odom";
-
+    odom_trans.child_frame_id = "base_link";
+    
+    
     odom_trans.transform.translation.x = x;
     odom_trans.transform.translation.y = y;
     odom_trans.transform.translation.z = 0.0;
@@ -57,7 +95,8 @@ int main(int argc, char** argv){
     nav_msgs::Odometry odom;
     odom.header.stamp = current_time;
     odom.header.frame_id = "odom";
-
+    odom.child_frame_id = "base_link";
+    
     //set the position
     odom.pose.pose.position.x = x;
     odom.pose.pose.position.y = y;
