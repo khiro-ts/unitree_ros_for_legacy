@@ -4,7 +4,7 @@
 	<arg name="firmwork" default="3_2"/>
 
 
-	<node pkg="unitree_legged_control" type="control_lcm" name="node_control_server"
+	<node pkg="unitree_legged_real" type="control_lcm" name="node_control_server"
 		respawn="false" output="screen" args="$(arg rname) $(arg ctrl_level)"/>
 
 	<param name="robot_name" value="$(arg rname)"/>
