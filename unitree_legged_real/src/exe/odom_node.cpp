@@ -60,14 +60,14 @@ int main(int argc, char** argv){
     roslcm.Get(RecvHighLCM);
     RecvHighROS = ToRos(RecvHighLCM);
 
-    vx = RecvHighRos.forwardSpeed;
+    vx = RecvHighROS.forwardSpeed;
     vy = 0.0;
-    vth = RecvHighRos.rotateSpeed;
+    vth = RecvHighROS.rotateSpeed;
     //compute odometry in a typical way given the velocities of the robot
     double dt = (current_time - last_time).toSec();
-    double delta_x = RecvHighRos.forwardSpeed * std::cos(th)*dt;
-    double delta_y = RecvHighRos.forwardSpeed * std::sin(th)*dt;
-    double delta_th = RecvHighRos.rotateSpeed * dt;
+    double delta_x = RecvHighROS.forwardSpeed * std::cos(th)*dt;
+    double delta_y = RecvHighROS.forwardSpeed * std::sin(th)*dt;
+    double delta_th = RecvHighROS.rotateSpeed * dt;
 
     x += delta_x;
     y += delta_y;
