@@ -48,15 +48,16 @@
 #include <pluginlib/class_loader.hpp>
 #include <std_srvs/Empty.h>
 
-#include <nav_core/base_local_planner.h>
-#include <nav_core/base_global_planner.h>
-#include <nav_core/recovery_behavior.h>
+#include <base_local_planner.h>
+#include <base_global_planner.h>
+#include <recovery_behavior.h>
 
 #include <costmap_2d/costmap_2d_ros.h>
 #include <costmap_2d/costmap_2d.h>
 
 #include <MoveBaseConfig.h>
 #include <tf2_ros/transform_listener.h>
+#include <tf2_geometry_msgs/tf2_geometry_msgs.h>
 
 namespace move_base {
   //typedefs to help us out with the action server so that we don't hace to type so much
