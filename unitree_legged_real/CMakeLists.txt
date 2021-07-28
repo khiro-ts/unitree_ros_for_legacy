@@ -19,6 +19,7 @@ find_package(catkin REQUIRED COMPONENTS
     dynamic_reconfigure
     message_generation
     move_base_msgs
+    move_base
     nav_core
     nav_msgs
     navfn

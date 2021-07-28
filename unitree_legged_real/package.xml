@@ -23,18 +23,18 @@
   <depend>tf2</depend>
   <depend>tf2_ros</depend>
   <depend>nav_msgs</depend>
-  <depend>actionlib</build_depend>
+  <depend>actionlib</depend>
   <depend>cmake_modules</depend>
   <depend>costmap_2d</depend>
   <depend>dynamic_reconfigure</depend>
   <depend>geometry_msgs</depend>
   <depend>message_generation</depend>
   <depend>move_base_msgs</depend>
+  <depend>move_base</depend>
   <depend>nav_core</depend>
   <depend>pluginlib</depend>
   <depend>rospy</depend>
   <depend>std_srvs</depend>
-  <depend>tf</depend>  
   <depend>base_local_planner</depend>
   <depend>clear_costmap_recovery</depend>
   <depend>navfn</depend>
