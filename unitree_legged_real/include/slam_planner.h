@@ -55,7 +55,7 @@
 #include <costmap_2d/costmap_2d_ros.h>
 #include <costmap_2d/costmap_2d.h>
 
-#include <move_base/MoveBaseConfig.h>
+#include <MoveBaseConfig.h>
 #include <tf2_ros/transform_listener.h>
 
 namespace move_base {
