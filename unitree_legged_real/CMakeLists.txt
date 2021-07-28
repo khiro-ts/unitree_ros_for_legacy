@@ -71,3 +71,7 @@ add_dependencies(control_lcm ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORT
 add_executable(odom_node src/exe/odom_node.cpp)
 target_link_libraries(odom_node ${EXTRA_LIBS} ${catkin_LIBRARIES})
 add_dependencies(odom_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+
+add_executable(slam_planner_node src/exe/slam_planner.cpp)
+target_link_libraries(slam_planner_node ${EXTRA_LIBS} ${catkin_LIBRARIES})
+add_dependencies(slam_planner_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
