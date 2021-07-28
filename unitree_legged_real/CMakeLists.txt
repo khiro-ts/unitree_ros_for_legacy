@@ -3,6 +3,8 @@ project(unitree_legged_real)
 
 add_compile_options(-std=c++11)
 
+find_path(slam_planner_INCLUDE_DIR MoveBaseConfig.h ${PROJECT_SOURCE_DIR}/include)
+
 find_package(catkin REQUIRED COMPONENTS
     roscpp
     geometry_msgs
@@ -94,3 +96,5 @@ add_dependencies(odom_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED
 add_executable(slam_planner_node src/exe/slam_planner.cpp)
 target_link_libraries(slam_planner_node ${EXTRA_LIBS} ${catkin_LIBRARIES})
 add_dependencies(slam_planner_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_include_directories(slam_planner_node PRIVATE ${slam_planner_INCLUDE_DIR})
+
