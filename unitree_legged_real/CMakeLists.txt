@@ -11,7 +11,24 @@ find_package(catkin REQUIRED COMPONENTS
     tf2
     tf2_ros
     nav_msgs
+    actionlib
+    base_local_planner
+    clear_costmap_recovery
+    cmake_modules
+    costmap_2d
+    dynamic_reconfigure
+    message_generation
+    move_base_msgs
+    nav_core
+    nav_msgs
+    navfn
+    pluginlib
+    rospy
+    rotate_recovery
+    std_srvs
 )
+find_package(Eigen3 REQUIRED)
+add_definitions(${EIGEN3_DEFINITIONS})
 
 catkin_package()
 
@@ -19,6 +36,7 @@ include_directories(
     include
     ${Boost_INCLUDE_DIR}
     ${catkin_INCLUDE_DIRS}
+    ${EIGEN3_INCLUDE_DIRS}
 )
 
 set(CMAKE_CXX_FLAGS "-O3")
