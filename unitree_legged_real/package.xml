@@ -31,7 +31,6 @@
   <depend>geometry_msgs</depend>
   <depend>message_generation</depend>
   <depend>move_base_msgs</depend>
-  <depend>nav_core</depend>
   <depend>pluginlib</depend>
   <depend>rospy</depend>
   <depend>std_srvs</depend>

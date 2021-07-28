@@ -22,8 +22,6 @@ find_package(catkin REQUIRED COMPONENTS
     dynamic_reconfigure
     message_generation
     move_base_msgs
-    nav_core
-    nav_msgs
     navfn
     pluginlib
     rospy
