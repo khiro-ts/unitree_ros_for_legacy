@@ -11,5 +11,6 @@
 	<param name="control_level" value="$(arg ctrl_level)"/>
 	<param name="firmwork" value="$(arg firmwork)"/>	
 	
-
+        <node pkg="unitree_legged_real" type="odom_node" name="odom_node_server"
+                respawn="false" output="screen"/>
 </launch>
