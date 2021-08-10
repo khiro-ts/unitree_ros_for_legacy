@@ -1,4 +1,4 @@
-/************************************************************************
+]/************************************************************************
 Copyright (c) 2018-2019, Unitree Robotics.Co.Ltd. All rights reserved.
 Use of this source code is governed by the MPL-2.0 license, see LICENSE.
 ************************************************************************/
@@ -41,33 +41,21 @@ void control_callback(const geometry_msgs::Twist& cmd_vel)
 	ROS_INFO("Linear Components:[%f,%f,%f]", cmd_vel.linear.x,  cmd_vel.linear.y,  cmd_vel.linear.z);
 	ROS_INFO("Angular Components:[%f,%f,%f]",cmd_vel.angular.x, cmd_vel.angular.y, cmd_vel.angular.z);
 	
+	
 	SendHighROS.forwardSpeed = cmd_vel.linear.x;
 	SendHighROS.rotateSpeed = cmd_vel.angular.z;
 
-	if(SendHighROS.rotateSpeed >0.3){
+/*	if(SendHighROS.rotateSpeed >0.3 || SendHighROS.rotateSpeed <-0.3){
 		SendHighROS.rotateSpeed = 0.2;
         	ROS_INFO("Angular Components changed:[%f]", SendHighROS.rotateSpeed);
 
-	} else if (SendHighROS.rotateSpeed <-0.3){
+	} else if (SendHighROS.rotateSpeed <-1){
 		SendHighROS.rotateSpeed = -0.2;
         	ROS_INFO("Angular Components changed:[%f]", SendHighROS.rotateSpeed);
 
 	}else {
 
-	}
-
-        if(SendHighROS.forwardSpeed >0.3){
-                SendHighROS.forwardSpeed = 0.2;
-                ROS_INFO("Angular Components changed:[%f]", SendHighROS.rotateSpeed);
-
-        } else if (SendHighROS.forwardSpeed <-0.3){
-                SendHighROS.forwardSpeed = -0.2;
-                ROS_INFO("Angular Components changed:[%f]", SendHighROS.rotateSpeed);
-
-        }else {
-
-        }
-
+	}*/
 
 }
 
@@ -118,7 +106,7 @@ int main(int argc, char *argv[])
 		{
 			SendHighROS.mode =1;
 		}
-        //memcpy(&SendHighLCM, &SendHighROS, sizeof(HighCmd));
+       //memcpy(&SendHighLCM, &SendHighROS, sizeof(HighCmd));
 		SendHighLCM = ToLcm(SendHighROS, SendHighLCM);
         roslcm.Send(SendHighLCM);
         ros::spinOnce();
